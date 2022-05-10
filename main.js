@@ -1,56 +1,47 @@
 "use strict"
 
 function renderCoffee(coffee) {
-    // for (var i = 0; i < coffee.length; i++){
-    //     if (coffee[i].id % 2 === 0) {
-    //         var html = '<div class = "coffee d-flex col-4 align-items-baseline ">';
-    //         {/*html += coffee.id;*/}
-    //         html += '<h2 class = "me-2">' + coffee.name + '</h2>';
-    //         html += '<p>' + coffee.roast + '</p>';
-    //         html += '</div>';
-    //         return html;
-    //
-    //     }
-    //     if (coffee[i].id % 2 === 1){
-    //         var html2 = '<div class = "coffee d-flex col-4 align-items-baseline ">';
-    //         {/*html += coffee.id;*/}
-    //         html2 += '<h2 class = "me-2">' + coffee.name + '</h2>';
-    //         html2 += '<p>' + coffee.roast + '</p>';
-    //         html2 += '</div>';
-    //         return html2;
-    //
-    //     }
-    //     }
-    //
-    // }
-    var html = '<div class = "coffee d-flex col-4 align-items-baseline ">';
+    var html = '<div class = "coffee d-flex col-6 my-3 align-items-baseline ">';
     {/*html += coffee.id;*/}
-        html += '<h2 class = "me-2">' + coffee.name + '</h2>';
-    html += '<p>' + coffee.roast + '</p>';
+    html += '<h2 class = "me-2 text-nowrap">' + coffee.name + '</h2>';
+    html += '<p class ="text-muted">' + coffee.roast + '</p>';
     html += '</div>';
-
-
     return html;
 }
-//displays coffee in an ascending order
+
+// //displays coffee in an ascending order
 function renderCoffees(coffees) {
     var html = '';
-    for(var i = 0; i < coffees.length; i++) {
+    for (var i = 0; i < coffees.length; i++) {
         html += renderCoffee(coffees[i]);
     }
-    return html;
+    return '<div class = row>' + html + '</div>';
 }
+
 // groups the different roasts and displays what coffees are a part of the selected group
 function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
     var selectedRoast = roastSelection.value;
     var filteredCoffees = [];
-    coffees.forEach(function(coffee) {
+    coffees.forEach(function (coffee) {
         if (coffee.roast === selectedRoast) {
+            filteredCoffees.push(coffee);
+        } else if('all' === selectedRoast){
             filteredCoffees.push(coffee);
         }
     });
     tbody.innerHTML = renderCoffees(filteredCoffees);
+}
+function searchCoffees(){
+    var inputRoast = coffeeNames.value.toUpperCase();
+    console.log(inputRoast)
+    var filteredInput = []
+    coffees.forEach(function(input){
+        if(input.name.toUpperCase().includes(inputRoast)){
+            filteredInput.push(input)
+        }
+    })
+    tbody.innerHTML = renderCoffees(filteredInput);
 }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
@@ -74,7 +65,9 @@ var coffees = [
 var tbody = document.querySelector('#coffees');
 var submitButton = document.querySelector('#submit');
 var roastSelection = document.querySelector('#roast-selection');
+var coffeeNames = document.querySelector('#coffee-name');
 
 tbody.innerHTML = renderCoffees(coffees);
 
 submitButton.addEventListener('click', updateCoffees);
+coffeeNames.addEventListener('keyup', searchCoffees);
