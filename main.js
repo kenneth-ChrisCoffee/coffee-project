@@ -67,7 +67,8 @@ var submitButton = document.querySelector('#submit');
 var roastSelection = document.querySelector('#roast-selection');
 var coffeeNames = document.querySelector('#coffee-name');
 
+
 tbody.innerHTML = renderCoffees(coffees);
 
-submitButton.addEventListener('click', updateCoffees);
+roastSelection.addEventListener('click', updateCoffees);
 coffeeNames.addEventListener('keyup', searchCoffees);
