@@ -1,7 +1,28 @@
 "use strict"
 
 function renderCoffee(coffee) {
-
+    // for (var i = 0; i < coffee.length; i++){
+    //     if (coffee[i].id % 2 === 0) {
+    //         var html = '<div class = "coffee d-flex col-4 align-items-baseline ">';
+    //         {/*html += coffee.id;*/}
+    //         html += '<h2 class = "me-2">' + coffee.name + '</h2>';
+    //         html += '<p>' + coffee.roast + '</p>';
+    //         html += '</div>';
+    //         return html;
+    //
+    //     }
+    //     if (coffee[i].id % 2 === 1){
+    //         var html2 = '<div class = "coffee d-flex col-4 align-items-baseline ">';
+    //         {/*html += coffee.id;*/}
+    //         html2 += '<h2 class = "me-2">' + coffee.name + '</h2>';
+    //         html2 += '<p>' + coffee.roast + '</p>';
+    //         html2 += '</div>';
+    //         return html2;
+    //
+    //     }
+    //     }
+    //
+    // }
     var html = '<div class = "coffee d-flex col-4 align-items-baseline ">';
     {/*html += coffee.id;*/}
         html += '<h2 class = "me-2">' + coffee.name + '</h2>';
