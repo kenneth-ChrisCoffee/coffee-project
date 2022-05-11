@@ -1,4 +1,5 @@
 "use strict"
+const user = JSON.parse(localStorage.getItem('users'));
 
 function renderCoffee(coffee) {
     var html = '<div class = "coffee d-flex col-6 my-3 align-items-baseline ">';
@@ -62,6 +63,7 @@ var coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
+
 function addACoffee(e){
     e.preventDefault();
     // var newType = newCoffeetype.value
@@ -69,16 +71,16 @@ function addACoffee(e){
     var newCoffee = {id:coffees.length + 1,name:newCoffeeName.value,roast:newCoffeetype.value};
     coffees.push(newCoffee);
     tbody.innerHTML = renderCoffees(coffees);
+    window.localStorage.setItem( 'users', JSON.stringify(coffees))
 }
-// console.log(addACoffee())
+
+
 var tbody = document.querySelector('#coffees');
 var submitButton = document.querySelector('#submit2');
 var roastSelection = document.querySelector('#roast-selection');
 var coffeeNames = document.querySelector('#coffee-name');
 var newCoffeetype = document.querySelector('#roast2-selection');
 var newCoffeeName = document.querySelector('#coffee2-name');
-console.log(newCoffeetype.value);
-console.log(newCoffeeName.value);
 
 tbody.innerHTML = renderCoffees(coffees);
 
