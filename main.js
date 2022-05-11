@@ -1,6 +1,5 @@
 "use strict"
-const user = JSON.parse(localStorage.getItem('users'));
-
+//rewrote function to build Divs instead of table
 function renderCoffee(coffee) {
     var html = '<div class = "coffee d-flex col-6 my-3 align-items-baseline ">';
     {/*html += coffee.id;*/}
@@ -27,6 +26,7 @@ function updateCoffees(e) {
     coffees.forEach(function (coffee) {
         if (coffee.roast === selectedRoast) {
             filteredCoffees.push(coffee);
+            //added else if to add function to input all
         } else if('all' === selectedRoast){
             filteredCoffees.push(coffee);
         }
@@ -62,12 +62,15 @@ var coffees = [
     {id: 13, name: 'Italian', roast: 'dark'},
     {id: 14, name: 'French', roast: 'dark'},
 ];
-
-
+//retrieves our object from the localstorage
+if(localStorage.getItem('users') === null){
+    localStorage.setItem( 'users', JSON.stringify(coffees))
+}else {
+    coffees = JSON.parse(localStorage.getItem('users'))
+}
+//adds our coffee input to the object and moves it to the local storage
 function addACoffee(e){
     e.preventDefault();
-    // var newType = newCoffeetype.value
-    // var newName = newCoffeeName.value
     var newCoffee = {id:coffees.length + 1,name:newCoffeeName.value,roast:newCoffeetype.value};
     coffees.push(newCoffee);
     tbody.innerHTML = renderCoffees(coffees);
